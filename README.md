@@ -1,5 +1,15 @@
 ## How to Run
 
+Copy `.env.example` to `.env`. Fill in the credentials in the environment variables or use this default credentials
+```bash
+MYSQL_HOST=chagiya-soap-db
+MYSQL_PORT=3306
+MYSQL_ROOT_PASSWORD=chagiya
+MYSQL_DATABASE=chagiya
+MYSQL_USER=chagiya
+MYSQL_PASSWORD=chagiya
+```
+
 `docker-compose up -d --build`
 
 Service will be served on `localhost:8888/logging`
