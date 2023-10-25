@@ -1,6 +1,26 @@
 version: '3'
 services:
+  chagiya-soap-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:${MYSQL_PORT}"
+    volumes:
+      - mysql_db_volume:/var/lib/mysql
+      - ./migrations:/docker-entrypoint-initdb.d
+
   chagiya-soap-service:
     build: .
     ports:
       - "8888:8888"
+    depends_on:
+      - chagiya-soap-db
+    env_file:
+      - .env
+
+volumes:
+  mysql_db_volume:
