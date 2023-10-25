@@ -1,12 +1,13 @@
 # Build stage
-FROM maven:3.8.1-openjdk-11-slim AS build
+FROM maven:3-openjdk-8 AS build
 WORKDIR /app
-COPY . /app
-RUN mvn clean install
+COPY . .
+RUN --mount=type=cache,target=/root/.m2 mvn clean install assembly:single
 
 # Package stage
-FROM amazoncorretto:8
-COPY --from=build /app/target/Chagiya-SOAP-1.0-SNAPSHOT.jar /usr/local/lib/app.jar
+FROM openjdk:8
+COPY --from=build /app/target/chagiya-soap-service-jar-with-dependencies.jar /usr/local/lib/app.jar
+COPY --from=build /app/.env /.env
 EXPOSE 8888
 ENTRYPOINT ["java", "-jar", "/usr/local/lib/app.jar"]
 
