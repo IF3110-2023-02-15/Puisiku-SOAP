@@ -1,5 +1,8 @@
 package com.chagiya.services.implementors;
 
+import com.chagiya.models.SubscriptionModel;
+import com.chagiya.repositories.LoggingRepository;
+import com.chagiya.repositories.SubscriptionRepository;
 import com.chagiya.services.interfaces.SubscriptionService;
 
 import javax.jws.WebParam;
@@ -16,7 +19,12 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public String subscribe(@WebParam(name = "email") String email) {
+        SubscriptionModel sm = new SubscriptionModel(email);
+
+        SubscriptionRepository sr = new SubscriptionRepository();
+        sr.addLogging(sm);
         ls.log(email);
+        
         return "Email " + email + " has successfully subscribed";
     }
 
