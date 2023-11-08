@@ -8,3 +8,8 @@ CREATE TABLE IF NOT EXISTS logs (
     requester           VARCHAR(50)     NOT NULL,
     timestamp           TIMESTAMP       DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS subscription (
+    id                  INT             AUTO_INCREMENT PRIMARY KEY,
+    email               TEXT            NOT NULL
+);
