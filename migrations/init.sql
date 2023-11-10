@@ -11,5 +11,6 @@ CREATE TABLE IF NOT EXISTS logs (
 
 CREATE TABLE IF NOT EXISTS subscription (
     id                  INT             AUTO_INCREMENT PRIMARY KEY,
-    email               TEXT            NOT NULL
+    email               TEXT            NOT NULL,
+    creatorId           TEXT            NOT NULL
 );

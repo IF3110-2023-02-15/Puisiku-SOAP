@@ -18,8 +18,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     }
 
     @Override
-    public String subscribe(@WebParam(name = "email") String email) {
-        SubscriptionModel sm = new SubscriptionModel(email);
+    public String subscribe(@WebParam(name = "email") String email, @WebParam(name = "creatorId") Integer creatorId) {
+        SubscriptionModel sm = new SubscriptionModel(email, creatorId);
 
         SubscriptionRepository sr = new SubscriptionRepository();
         sr.addLogging(sm);

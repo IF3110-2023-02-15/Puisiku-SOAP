@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class SubscriptionRepository extends Repository {
     public void addLogging(SubscriptionModel sm) {
-        String query = "INSERT INTO subscription (email) VALUES(?)";
+        String query = "INSERT INTO subscription (email, creatorId) VALUES(?, ?)";
         try {
             PreparedStatement pstmt = this.conn.prepareStatement(query);
             pstmt.setString(1, sm.getEmail());

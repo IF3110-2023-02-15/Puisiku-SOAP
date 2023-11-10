@@ -9,7 +9,7 @@ import javax.jws.soap.SOAPBinding;
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT)
 public interface SubscriptionService {
     @WebMethod
-    String subscribe(@WebParam(name = "email") String email);
+    String subscribe(@WebParam(name = "email") String email, @WebParam(name = "creatorId") Integer creatorId);
 
     @WebMethod
     String checkSubscription(@WebParam(name = "email") String email);
