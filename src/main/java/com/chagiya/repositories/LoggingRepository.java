@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class LoggingRepository extends Repository {
     public void addLogging(LoggingModel lm) {
-        String query = "INSERT INTO logs (description, ip_address, endpoint, requester) VALUES(?, ?, ?, ?)";
+        String query = "INSERT INTO logs (description, ipAddress, endpoint, requester) VALUES(?, ?, ?, ?)";
         try {
             PreparedStatement pstmt = this.conn.prepareStatement(query);
             pstmt.setString(1, lm.getDescription());
@@ -16,7 +16,6 @@ public class LoggingRepository extends Repository {
             pstmt.setString(4, lm.getRequester());
             pstmt.execute();
             pstmt.close();
-            this.conn.commit();
         } catch (SQLException e){
             e.printStackTrace();
         }
