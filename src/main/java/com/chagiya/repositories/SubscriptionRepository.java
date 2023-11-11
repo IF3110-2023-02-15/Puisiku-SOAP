@@ -7,15 +7,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class SubscriptionRepository extends Repository {
-    public void subscribe(SubscriptionModel sm) {
+    public void subscribe(SubscriptionModel sm) throws Exception{
         String query = "INSERT INTO subscription (email, creatorId) VALUES(?, ?)";
         try {
             PreparedStatement pstmt = this.conn.prepareStatement(query);
+            pstmt.setString(1, sm.getEmail());
+            pstmt.setInt(2, sm.getCreatorId());
             pstmt.execute();
             pstmt.close();
-            this.conn.commit();
         } catch (SQLException e){
             e.printStackTrace();
+            throw new Exception("An error occurred during subscribe");
         }
     }
 
