@@ -1,5 +1,7 @@
 package com.chagiya.services.interfaces;
 
+import com.chagiya.models.response.Response;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -9,8 +11,8 @@ import javax.jws.soap.SOAPBinding;
 @SOAPBinding(style = SOAPBinding.Style.DOCUMENT)
 public interface SubscriptionService {
     @WebMethod
-    String subscribe(@WebParam(name = "email") String email);
+    public Response subscribe(@WebParam(name = "email") String email, @WebParam(name = "creatorId") int creatorId);
 
     @WebMethod
-    String checkSubscription(@WebParam(name = "email") String email);
+    public Response getSubscriberCount(@WebParam(name = "creatorId") int creatorId);
 }
