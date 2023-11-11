@@ -9,4 +9,5 @@ import lombok.NonNull;
 @AllArgsConstructor
 public class SubscriptionModel {
     private final String email;
+    private final Integer creatorId;
 }
