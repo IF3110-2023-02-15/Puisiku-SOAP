@@ -2,7 +2,6 @@ package com.chagiya.services.implementors;
 
 import com.chagiya.models.SubscriptionModel;
 import com.chagiya.models.response.Response;
-import com.chagiya.repositories.LoggingRepository;
 import com.chagiya.repositories.SubscriptionRepository;
 import com.chagiya.services.interfaces.LoggingService;
 import com.chagiya.services.interfaces.SubscriptionService;
