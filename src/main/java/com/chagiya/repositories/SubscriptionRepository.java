@@ -5,6 +5,8 @@ import com.chagiya.models.SubscriptionModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubscriptionRepository extends Repository {
     public void subscribe(SubscriptionModel sm) throws Exception{
@@ -40,4 +42,28 @@ public class SubscriptionRepository extends Repository {
         }
         return subscriberCount;
     }
+
+    public List<Integer> getSubscribedCreators(String email) throws Exception {
+        List<Integer> creatorIds = new ArrayList<>();
+
+        String query = "SELECT DISTINCT creatorId FROM subscription WHERE email = ?";
+        try {
+            PreparedStatement pstmt = this.conn.prepareStatement(query);
+            pstmt.setString(1, email);
+
+            ResultSet resultSet = pstmt.executeQuery();
+            while (resultSet.next()) {
+                creatorIds.add(resultSet.getInt("creatorId"));
+            }
+
+            resultSet.close();
+            pstmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("An error occurred during getting subscribed creators");
+        }
+
+        return creatorIds;
+    }
+
 }
