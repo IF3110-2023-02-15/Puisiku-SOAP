@@ -15,4 +15,7 @@ public interface SubscriptionService {
 
     @WebMethod
     public Response getSubscriberCount(@WebParam(name = "creatorId") int creatorId);
+
+    @WebMethod
+    public Response getSubscribedCreators(@WebParam(name = "email") String email);
 }

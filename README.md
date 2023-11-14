@@ -2,12 +2,15 @@
 
 Copy `.env.example` to `.env`. Fill in the credentials in the environment variables or use this default credentials
 ```bash
-MYSQL_HOST=chagiya-soap-db
+MYSQL_HOST=puisiku-soap-db
 MYSQL_PORT=3306
-MYSQL_ROOT_PASSWORD=chagiya
-MYSQL_DATABASE=chagiya
-MYSQL_USER=chagiya
-MYSQL_PASSWORD=chagiya
+MYSQL_ROOT_PASSWORD=puisiku
+MYSQL_DATABASE=puisiku
+MYSQL_USER=puisiku
+MYSQL_PASSWORD=puisiku
+
+PHP_API_KEY=fromphp
+REST_API_KEY=fromrest
 ```
 
 `docker-compose up -d --build`
@@ -25,12 +28,19 @@ on Body, raw xml, use this Envelope
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://services.chagiya.com/">
    <soapenv:Header/>
    <soapenv:Body>
-      <ser:log>
-         <message>Your Test Message Here</message>
-      </ser:log>
+      <ser:checkSubscription>
+         <email>joli@lol.com</email>
+      </ser:checkSubscription>
    </soapenv:Body>
 </soapenv:Envelope>
 
 ```
 
 Go to header, delete `Content-Type: application/xml`. Add `Content-Type: text/xml`
+
+
+
+localhost:8888/subcription
+
+Body -> Raw -> Type (xml)
+

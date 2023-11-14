@@ -27,6 +27,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public Response subscribe(@WebParam(name = "email") String email, @WebParam(name = "creatorId") int creatorId) {
+        email = email.trim();
+
         MessageContext mc = wsContext.getMessageContext();
 
         String apiKey = this.getSpecificHeader("x-api-key");
@@ -77,6 +79,36 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         Integer subscriberCount = subscriptionRepository.getSubscriberCount(creatorId);
         return new Response(200, subscriberCount.toString());
+    }
+
+    @Override
+    public Response getSubscribedCreators(@WebParam(name = "email") String email) {
+        email = email.trim();
+
+        MessageContext mc = wsContext.getMessageContext();
+
+        String apiKey = this.getSpecificHeader("x-api-key");
+
+        if (apiKey == null){
+            return new Response(400, "API Key not provided");
+        }
+
+        AuthMiddleware am = new AuthMiddleware();
+        String authenticated = am.authenticate(apiKey);
+
+        if (authenticated == null) {
+            return new Response(401, "Unauthorized Request");
+        }
+
+        String description = "Get email " + email + " subscribed creators";
+        loggingService.log(mc, description, "/subscription/getSubscribedCreator", authenticated);
+
+        try {
+            List<Integer> creatorIds = subscriptionRepository.getSubscribedCreators(email);
+            return new Response(200, creatorIds.toString());
+        } catch (Exception e) {
+            return new Response(400, e.toString());
+        }
     }
 
     public String getSpecificHeader(String headerName) {

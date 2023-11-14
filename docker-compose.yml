@@ -12,15 +12,29 @@ services:
     volumes:
       - mysql_db_volume:/var/lib/mysql
       - ./migrations:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - puisiku
 
   puisiku-soap-service:
     build: .
     ports:
       - "8888:8888"
     depends_on:
-      - puisiku-soap-db
+      puisiku-soap-db:
+        condition: service_healthy
     env_file:
       - .env
+    networks:
+      - puisiku
 
 volumes:
   mysql_db_volume:
+
+networks:
+  puisiku:
+    external: true
