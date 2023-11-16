@@ -4,6 +4,7 @@ import com.chagiya.middlewares.AuthMiddleware;
 import com.chagiya.models.SubscriptionModel;
 import com.chagiya.models.response.Response;
 import com.chagiya.repositories.SubscriptionRepository;
+import com.chagiya.services.interfaces.EmailService;
 import com.chagiya.services.interfaces.LoggingService;
 import com.chagiya.services.interfaces.SubscriptionService;
 
@@ -48,6 +49,13 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         loggingService.log(mc, description, "/subscription/subscribe", authenticated);
 
         SubscriptionModel subscriptionModel = new SubscriptionModel(email, creatorId);
+
+        try {
+            EmailService emailService = new EmailServiceImpl();
+            emailService.sendEmail( email , "Subscription Confirmation", description);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         try {
             subscriptionRepository.subscribe(subscriptionModel);

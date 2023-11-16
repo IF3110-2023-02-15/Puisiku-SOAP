@@ -22,6 +22,10 @@ MYSQL_PASSWORD=puisiku
 
 PHP_API_KEY=fromphp
 REST_API_KEY=fromrest
+
+EMAIL_USERNAME=2070c7d89b4616
+EMAIL_PASSWORD=3ee40c47ec487d
+EMAIL_TO=13521046@std.stei.itb.ac.id
 ```
 
 2. Execute the following command to build and start the application:
@@ -49,6 +53,7 @@ The service will be available at `localhost:8888`. To interact with this service
 | Task                      | Contributor  |
 |---------------------------|--------------|
 | Docker and Infrastructure | 13521046     |
+| Email                     | 13521046     |
 | getSubscribedCreators     | 13521046     |
 | getSubscriberCount        | 13521103     |
 | Logging                   | 13521046     |
